@@ -1,0 +1,4 @@
+- name: Install TMUX
+  become: true
+  apt: name=tmux
+  tags: &tags_for_tmux_tasks ['install', 'productivity', 'dotfiles', 'tmux']

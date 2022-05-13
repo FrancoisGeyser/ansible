@@ -1,0 +1,27 @@
+- name: Install System Packages 1 (build-essential)
+  become: true
+  apt:
+    name: ["build-essential"]
+  tags:
+    - install
+    - neovim
+    - core
+
+- name: Install System Packages 2 (unzip)
+  become: true
+  apt:
+    name: ["unzip"]
+  tags:
+    - install
+    - neovim
+    - core
+
+- name: Install System Packages 3 (the rest)
+  become: true
+  apt:
+    name: ["curl", "python3-pip"]
+  tags:
+    - install
+    - core
+
+

@@ -1,0 +1,26 @@
+- name: Remove neovim
+  become: true
+  shell: rm -rf ~/neovim
+  tags:
+    - install
+    - neovim
+- name: Install neovim
+  become: true
+  apt:
+    name: ["neovim"]
+  tags:
+    - install
+    - neovim
+- name: Install Vim-Plug
+  shell: curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  tags:
+    - install
+    - dotfiles
+    - neovim
+- name: Install ripGrep
+  become: true
+  apt:
+    name: ["ripgrep"]
+  tags:
+    - install
+    - neovim

@@ -1,0 +1,40 @@
+- name: Installing stow
+  become: true
+  apt: name=stow
+  tags:
+    - install
+    - dotfiles
+    - stow
+- name: Cloning .dotfiles
+  ansible.builtin.git:
+    repo: 'https://github.com/FrancoisGeyser/dotfiles.git'
+    dest: "{{ lookup('env', 'HOME') }}/.dotfiles"
+    recursive: yes
+    update: yes
+    accept_hostkey: yes
+    version: main
+  tags:
+    - install
+    - dotfiles
+    - stow
+
+
+- name: Check that the conf exists
+  stat:
+    path: /home/akula/.zshrc
+  register: zsh_stats
+  tags: 
+    - stow
+
+- name: Remove conf if required
+  tags: 
+    - stow
+  when: zsh_stats.stat.exists == True
+  shell: rm /home/akula/.zshrc
+
+- name: Stow dotfiles
+  shell: cd $HOME/.dotfiles && stow * --target=$HOME
+  tags:
+    - install
+    - dotfiles
+    - stow
