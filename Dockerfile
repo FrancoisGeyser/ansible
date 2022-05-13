@@ -16,5 +16,5 @@ WORKDIR /home/akula
 
 FROM prime
 # COPY . .
-RUN ["sh", "-c", "ansible-pull https://github.com/FrancoisGeyser/ansible.git local.yml"]
+RUN ["sh", "-c", "ansible-pull -U https://github.com/FrancoisGeyser/ansible.git playbook.yml"]
 CMD ["sh", "-c", "zsh"]
